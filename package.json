@@ -31,7 +31,7 @@
     "@prisma/client": ">=6.0.0",
     "next": "^15.0.0",
     "react": "^19.0.0",
-    "recharts": "^2.0.0"
+    "recharts": ">=2.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
