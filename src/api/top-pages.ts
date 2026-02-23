@@ -27,7 +27,7 @@ export function createTopPagesHandler(config: AnalyticsConfig) {
         take: limit,
       });
 
-      const formatted = topPages.map(p => ({
+      const formatted = topPages.map((p: any) => ({
         path: p.path,
         views: p._count.path,
       }));

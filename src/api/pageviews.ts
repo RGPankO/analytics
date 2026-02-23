@@ -32,7 +32,7 @@ export function createPageviewsHandler(config: AnalyticsConfig) {
 
       // Group by date
       const viewsByDate: Record<string, number> = {};
-      pageviews.forEach(pv => {
+      pageviews.forEach((pv: { timestamp: Date }) => {
         const date = pv.timestamp.toISOString().split('T')[0];
         viewsByDate[date] = (viewsByDate[date] || 0) + 1;
       });
@@ -41,12 +41,6 @@ export function createPageviewsHandler(config: AnalyticsConfig) {
       const formatted = Object.entries(viewsByDate)
         .map(([date, views]) => ({ date, views }))
         .sort((a, b) => a.date.localeCompare(b.date));
-
-      // Convert bigint to number
-      const formatted = timeseriesData.map(row => ({
-        date: row.date,
-        views: Number(row.views),
-      }));
 
       return NextResponse.json({ data: formatted });
     } catch (error) {

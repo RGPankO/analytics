@@ -14,7 +14,7 @@ export function createCollectHandler(config: AnalyticsConfig) {
 
   return async function POST(request: NextRequest) {
     try {
-      const body = await request.json();
+      const body: any = await request.json();
 
       const {
         websiteId,

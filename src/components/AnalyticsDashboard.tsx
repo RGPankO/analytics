@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   LineChart,
   Line,
@@ -92,9 +92,9 @@ export function AnalyticsDashboard({
           sessionsRes.json(),
         ]);
 
-        setPageviews(pageviewsData.data || []);
-        setTopPages(topPagesData.data || []);
-        setSessionStats(sessionsData);
+        setPageviews((pageviewsData as any).data || []);
+        setTopPages((topPagesData as any).data || []);
+        setSessionStats(sessionsData as SessionStats);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {

@@ -41,11 +41,11 @@ export function createSessionsStatsHandler(config: AnalyticsConfig) {
 
       return NextResponse.json({
         totalSessions,
-        devices: devices.map(d => ({
+        devices: devices.map((d: any) => ({
           device: d.device || 'Unknown',
           count: d._count.device,
         })),
-        browsers: browsers.map(b => ({
+        browsers: browsers.map((b: any) => ({
           browser: b.browser || 'Unknown',
           count: b._count.browser,
         })),
