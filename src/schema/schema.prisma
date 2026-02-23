@@ -1,0 +1,51 @@
+// Analytics Schema Fragment
+// Copy these models into your schema.prisma
+// Add @@schema("your_schema_name") if you use schemas
+
+model AnalyticsSession {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  country   String?  @db.VarChar(2)
+  device    String?  @db.VarChar(50)
+  os        String?  @db.VarChar(50)
+  browser   String?  @db.VarChar(50)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  events    AnalyticsEvent[]
+  pageviews AnalyticsPageview[]
+
+  @@index([createdAt])
+  @@index([country])
+  @@map("analytics_sessions")
+}
+
+model AnalyticsEvent {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sessionId  String   @map("session_id") @db.Uuid
+  type       String   @db.VarChar(100)
+  path       String   @db.VarChar(500)
+  properties Json?
+  timestamp  DateTime @default(now())
+
+  session AnalyticsSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([type])
+  @@index([timestamp])
+  @@map("analytics_events")
+}
+
+model AnalyticsPageview {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sessionId String   @map("session_id") @db.Uuid
+  path      String   @db.VarChar(500)
+  referrer  String?  @db.VarChar(500)
+  duration  Int?
+  timestamp DateTime @default(now())
+
+  session AnalyticsSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([path])
+  @@index([timestamp])
+  @@map("analytics_pageviews")
+}

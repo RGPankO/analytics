@@ -1,0 +1,41 @@
+{
+  "name": "@21digital/analytics",
+  "version": "0.1.0",
+  "description": "Privacy-first analytics for Next.js projects - self-hosted, dependency-injectable, themeable",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "analytics",
+    "nextjs",
+    "privacy",
+    "self-hosted",
+    "prisma"
+  ],
+  "author": "21digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RGPankO/analytics.git"
+  },
+  "peerDependencies": {
+    "@prisma/client": "^6.0.0",
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "recharts": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.0.0"
+  }
+}
